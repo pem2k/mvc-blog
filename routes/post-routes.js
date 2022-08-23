@@ -25,11 +25,8 @@ router.get("/:id", async (req, res) => {
             include: [
                 {model: User}, 
                 {
-                model: Comment, 
-                where: {post_id:req.params.id}, 
-                include: [{
-                    model: User
-                }]
+                model: Comment,  
+               
             }]
         })
         
@@ -43,6 +40,25 @@ router.get("/:id", async (req, res) => {
             msg:"internal server error!",
             err
     })}
+})
+
+router.post("/comment", async (req, res) =>{
+    try{
+        const newComment = await Comment.create({
+            content: req.body.content,
+            user_id: req.session.user.id,
+            post_id: req.body.post_id
+        }
+        )
+
+        res.status(200).json()
+
+    }catch(err){
+        if(err){
+            console.log(err)
+            res.status(500).send("Internal server error")
+        }
+    }
 })
 
 router.delete("/", async(req, res) => {

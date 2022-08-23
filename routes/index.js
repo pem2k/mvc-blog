@@ -33,13 +33,13 @@ router.get('/dashboard', async (req, res) => {
     const allPosts = await Post.findAll({
         order: [['createdAt', 'DESC']],
         where:{user_id:req.session.user.id},
-        include: User
+        
     })
    
     const jPosts = allPosts.map(element => element.toJSON())
     console.log(jPosts)
 
-    return res.render("home", {
+    return res.render("dashboard", {
         dashPost: jPosts,
         user: req.session.user
     })

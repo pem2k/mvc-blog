@@ -2,7 +2,7 @@
   <div class="card-header">
    {{post.User.first_name}} {{post.User.last_name}}<p class="card-text font-italic w-100 text-right text-secondary" style="font-size: 0.725rem">Last updated {{post.updatedAt}}</p>
   </div>
-  <div class="card-body" data-postId = {{id}}>
+  <div class="card-body" id ="singlePostId" data-postId = {{post.id}}>
     <h5 class="card-title">{{post.title}}</h5>
     <p class="card-text">{{post.content}}</p>
   </div>
@@ -12,9 +12,9 @@
     {{/each}}
     {{/if}}
   <div class="input-group">
-                <input type="text" class="form-control" placeholder="Comment" aria-label="Comment" aria-describedby="basic-addon2">
+                <input type="text" id="commentBox" class="form-control" placeholder="Comment" aria-label="Comment" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                  <button class="btn btn-primary" type="button">Submit</button>
+                  <button class="btn btn-primary" type="button" id="commentSubmitter">Submit</button>
                 </div>
               </div>
 </div>
