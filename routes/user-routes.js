@@ -14,22 +14,12 @@ router.post("/signup", async (req, res) => {
             email: req.body.email,
             password: req.body.password
         })
-
-		// Pull created user's full data.
-		const foundUser = await User.findOne({
-			where: {
-				email: req.body.email
-			},
-			include: [{
-				model: Post
-			}]
-		})
-
+		
 		req.session.user = {
-			id: foundUser.id,
-			first_name: foundUser.first_name,
-			last_name: foundUser.last_name,
-			email: foundUser.email,
+			id: newUser.id,
+			first_name: newUser.first_name,
+			last_name: newUser.last_name,
+			email: newUser.email,
 		}
 
         return res.redirect("home")
@@ -57,15 +47,12 @@ router.get("/all", async (req, res)=> {
 //login route
 router.post("/login", async (req, res) => {
     if (req.session.user) {
-        return res.redirect("/feed");
+        return res.redirect("/");
     }
     const foundUser = await User.findOne({
         where: {
             email: req.body.email
         },
-		include: [{
-			model: Post,
-		}]
     }
     )
     if (!foundUser) {
@@ -83,8 +70,7 @@ router.post("/login", async (req, res) => {
 		email: foundUser.email,
 	}
 
-    return res.status(200).json(foundUser)
-    //res.render homepage/feed
+    return res.redirect("home")
 })
 
 //logout route

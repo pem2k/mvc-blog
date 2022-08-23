@@ -1,0 +1,20 @@
+<div class="card" >
+  <div class="card-header">
+   {{post.User.first_name}} {{post.User.last_name}}<p class="card-text font-italic w-100 text-right text-secondary" style="font-size: 0.725rem">Last updated {{post.updatedAt}}</p>
+  </div>
+  <div class="card-body" data-postId = {{id}}>
+    <h5 class="card-title">{{post.title}}</h5>
+    <p class="card-text">{{post.content}}</p>
+  </div>
+   {{#if post.Comments}}
+    {{#each post.Comments}}
+    <div class="my-4">{{>comment}}</div>
+    {{/each}}
+    {{/if}}
+  <div class="input-group">
+                <input type="text" class="form-control" placeholder="Comment" aria-label="Comment" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="button">Submit</button>
+                </div>
+              </div>
+</div>

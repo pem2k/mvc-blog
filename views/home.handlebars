@@ -1,7 +1,7 @@
-<div class="d-flex flex-wrap flex-fill col-12" id="feed">
-		{{#if comments}}
-		{{#each comments}}
-		{{>comment}}
+<div class="col-12 my-4" id="home">
+		{{#if posts}}
+		{{#each posts}}
+		<div class = "my-4">{{>post}}</div>
 		{{/each}}	
 		{{/if}}
 	</div>

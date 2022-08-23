@@ -12,13 +12,13 @@ router.get('/', async (req, res) => {
     if (req.session.user){
         return res.redirect("/home");
     }
-    
+
     res.render('login');
 })
 
 router.get('/signup', async (req, res) => {
     if (req.session.user){
-        return res.redirect("/home");
+        return res.redirect("home");
     }
 
     res.render('signup');
@@ -28,33 +28,45 @@ router.get('/signup', async (req, res) => {
 router.get('/dashboard', async (req, res) => {
     if (!req.session.user) {
         return res.redirect('/')
-    } 
-
-    const allPosts = await Post.findAll()  
-
-    return res.render("dashboard", {
-        posts: allPosts,
-        user: req.session.user
-    })
-       
-});
-
-//home get
-router.get("/home", async(req,res)=> {
-    if (!req.session.user) {
-        return res.redirect('/')
     }
 
     const allPosts = await Post.findAll({
-        where: {
-            user_id: req.session.user.id
-        }
-    })    
+        order: [['createdAt', 'DESC']],
+        where:{user_id:req.session.user.id},
+        include: User
+    })
+   
+    const jPosts = allPosts.map(element => element.toJSON())
+    console.log(jPosts)
+
     return res.render("home", {
-        posts: allPosts,
+        dashPost: jPosts,
         user: req.session.user
     })
 })
 
+//home get
+router.get("/home", async(req,res)=> {
+
+    const allPosts = await Post.findAll({
+        order: [['createdAt', 'DESC']],
+        include: User
+    })
+   
+    const jPosts = allPosts.map(element => element.toJSON())
+
+    return res.render("home", {
+        posts: jPosts,
+        user: req.session.user
+    })
+})
+
+router.get("/logout", (req, res) => {
+	if (!req.session.user) {
+		return res.redirect("/")
+	}
+	req.session.destroy();
+	return res.redirect("/")
+})
 
 module.exports = router

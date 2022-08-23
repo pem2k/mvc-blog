@@ -1,5 +1,5 @@
 const sequelize = require("../config/connection");
-const { User, Post } = require("../models")
+const { User, Post, Comment } = require("../models")
 require('dotenv').config();
 
 const users= [
@@ -41,10 +41,34 @@ const posts = [
     },
 ]
 
+const comments = [
+    {
+        content: "nice post!",
+        user_id: 1,
+        post_id: 1
+    },
+    {
+        content: "nice post 2!",
+        user_id: 1,
+        post_id: 1
+    },
+    {
+        content: "nice post 3!",
+        user_id: 1,
+        post_id: 1
+    },
+    {
+        content: "nice post 4!",
+        user_id: 1,
+        post_id: 1
+    }
+]
+
 const seeder = async () => {
     await sequelize.sync({force:true});
     await User.bulkCreate(users,{individualHooks:true})
     await Post.bulkCreate(posts)
+    await Comment.bulkCreate(comments)
     process.exit(0)
 }
 
