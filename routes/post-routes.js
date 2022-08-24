@@ -26,7 +26,7 @@ router.get("/:id", async (req, res) => {
                 {model: User}, 
                 {
                 model: Comment,  
-               
+               include: [User]
             }]
         })
         
