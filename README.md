@@ -20,7 +20,7 @@ This project can be installed by cloning the repo, installing required dependenc
 
 ## Usage
 
-This project can be used at LINK HERE, it can also be used locally by running the command "npm start" if it has been installed locally as described above.
+This project can be used at [https://mvc-blog-app.herokuapp.com/](https://mvc-blog-app.herokuapp.com/), it can also be used locally by running the command "npm start" if it has been installed locally as described above.
 
 ## Questions
 
