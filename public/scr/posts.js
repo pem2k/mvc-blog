@@ -16,7 +16,7 @@ $("#submitNewPost").click(
         }).then(res => res.json())
         .then((data) => {
             console.log(data) 
-            location.reload
+            location.reload()
         })
     });
 
@@ -36,8 +36,7 @@ $("#postDeleter").click(
         }).then(res => res.json())
         .then((data) => {
             console.log(data) 
-            location.reload
-        })
+            location.reload()})
     })
   
 
@@ -58,7 +57,7 @@ $("#commentSubmitter").click(
         }).then(res => res.json())
         .then((data) => {
             console.log(data) 
-            location.reload
+            location.reload()
         })
     });
 
