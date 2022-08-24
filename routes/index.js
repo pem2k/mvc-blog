@@ -10,7 +10,7 @@ router.use('/posts', postRoutes);
 //page get routes
 router.get('/', async (req, res) => {
     if (req.session.user){
-        return res.redirect("/home");
+        return res.redirect("home");
     }
 
     res.render('login');

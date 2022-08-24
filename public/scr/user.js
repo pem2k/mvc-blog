@@ -14,16 +14,21 @@ $("#userLogin").click(
                 email: $("#userEmail").val(),
                 password: $("#userPassword").val()
             })
-        }).then(res => {
+        })
+        .then((res) => res.json())
+        .then((data)=>{
+            console.log(data)
             location.reload()
+        })
         });
-    })
+    
 
 $("#signUpButton").click(function signUp(event) {
     event.preventDefault()
-    fetch("users/signup", {
+    fetch("/users/signup", {
         method: "POST",
         headers: {
+            "Accept": "application/json",
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -37,7 +42,7 @@ $("#signUpButton").click(function signUp(event) {
         .then((res) => res.json())
         .then((data)=>{
             console.log(data)
-            window.location.href = "/"
+            location.reload()
         }
             
         )

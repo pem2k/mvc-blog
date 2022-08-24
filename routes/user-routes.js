@@ -22,7 +22,7 @@ router.post("/signup", async (req, res) => {
 			email: newUser.email,
 		}
 
-        return res.redirect("home")
+        return res.status(200).json(req.session.user)
 
     } catch (err) {
         if (err) {
@@ -70,7 +70,7 @@ router.post("/login", async (req, res) => {
 		email: foundUser.email,
 	}
 
-    return res.redirect("home")
+    return res.status(200).json(req.session.user)
 })
 
 //logout route
