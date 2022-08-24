@@ -3,6 +3,9 @@ const router = express.Router();
 const { Post, User, Comment } = require('../models')
 
 router.post("/", async (req,res)=>{
+    if (!req.session.user) {
+        return res.redirect('/')
+    }
     try{
         const newPost = await Post.create({
             title: req.body.title,
@@ -31,7 +34,7 @@ router.get("/:id", async (req, res) => {
         })
         
         const onePostReady = onePost.toJSON()
-        console.log(onePostReady)
+       
         res.render("onePost", {post: onePostReady, user: req.session.user,})
 
     }catch(err){
@@ -43,6 +46,9 @@ router.get("/:id", async (req, res) => {
 })
 
 router.post("/comment", async (req, res) =>{
+    if (!req.session.user) {
+        return res.redirect('/')
+    }
     try{
         const newComment = await Comment.create({
             content: req.body.content,
@@ -51,7 +57,7 @@ router.post("/comment", async (req, res) =>{
         }
         )
 
-        res.status(200).json()
+        res.status(200).json(newComment)
 
     }catch(err){
         if(err){
@@ -62,16 +68,15 @@ router.post("/comment", async (req, res) =>{
 })
 
 router.delete("/", async(req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/')
+    }
     try{
     const delPost = await Post.findByPk(req.body.id)
 
-    if(delPost.user_id != req.session.user.id){
-        return res.status(403)
-    }
+    await delPost.destroy()
 
-   await delPost.destroy()
-
-    res.status(204)
+    return res.status(200).json(delPost)
 }catch(err){
     if(err){
         console.log(err)

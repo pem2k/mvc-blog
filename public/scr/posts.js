@@ -33,16 +33,17 @@ $("#postDeleter").click(
             body: JSON.stringify({
                id: $("#postDeleter").parent().attr("data-postId")
             })
-        }).then(res => res.json())
+        }).then((res) => res.json())
         .then((data) => {
             console.log(data) 
-            location.reload()})
+            location.reload()
+        })
     })
   
 
 $("#commentSubmitter").click(
-    function del(event) {
-        console.log($("#singlePostId").attr("data-postId"))
+    function comment(event) {
+        
         event.preventDefault()
         fetch("/posts/comment", {
             method: 'POST',
@@ -53,8 +54,8 @@ $("#commentSubmitter").click(
             body: JSON.stringify({
                 content: $("#commentBox").val(),
                 post_id: $("#singlePostId").attr("data-postId")
-            }),
-        }).then(res => res.json())
+            })
+        }).then((res) => res.json())
         .then((data) => {
             console.log(data) 
             location.reload()
