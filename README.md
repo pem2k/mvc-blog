@@ -16,7 +16,7 @@ This project was an excercie in mvc architecture. I ran into no significant issu
 
 ## Installation
 
-This project can be installed by cloning the repo, installing required dependencies, creating a mysql database, and running the db.schema file.
+This project can be installed by cloning the repo, installing required dependencies, creating a mysql database, and running the db.schema file!
 
 ## Usage
 
